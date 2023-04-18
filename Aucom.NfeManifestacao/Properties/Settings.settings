@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Scire.NFeManifestacao.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Cnpj" Type="System.String" Scope="User">
+      <Value Profile="(Default)">45007911000189</Value>
+    </Setting>
+    <Setting Name="Razao" Type="System.String" Scope="User">
+      <Value Profile="(Default)">JLV LIVRARIA LTDA</Value>
+    </Setting>
+    <Setting Name="DiretorioNfe" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\\NFe</Value>
+    </Setting>
+    <Setting Name="Uf" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SP</Value>
+    </Setting>
+    <Setting Name="UltimoNSU" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="UltimoSefaz" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>

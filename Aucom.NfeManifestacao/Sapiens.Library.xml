@@ -1,0 +1,316 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sapiens.Library</name>
+    </assembly>
+    <members>
+        <member name="T:Sapiens.Library.Log.LogSistema">
+            <summary>
+            Classe para salvar log de erros.
+            A classe disponiliza duas opções:
+            Arquivo texto -  Salva arquivo texto em um diretório determinado pelo usuário.
+                             Quando o site estiver em cluster, ele procura no AppSettings 
+                             a variavel ClusterName para diferencia o nome do arquivo.
+                             Essa varivel normalmente será configurado no IIS.
+            Banco de dados - Salva o log de erro no banco de dados. O método para salvar
+                             o log no banco dados é um delegate para que seja possivel 
+                             adequar o método de salva a classe de banco de dados do 
+                             sistema.
+            </summary>
+        </member>
+        <member name="M:Sapiens.Library.Log.LogSistema.#ctor(System.String)">
+            <summary>
+            Construtor define o nome do arquivo de LOG de acordo com o parâmetro
+            </summary>
+            <param name="dirPath">diretório de gravaçao do arquivo de LOG</param>
+        </member>
+        <member name="M:Sapiens.Library.Log.LogSistema.GetErrorMessage(System.Exception)">
+            <summary>
+            Formata o erro.
+            </summary>
+            <param name="ex">Exceção</param>
+            <returns>String Formatada</returns>
+        </member>
+        <member name="M:Sapiens.Library.Log.LogSistema.Log(System.Exception,System.Boolean)">
+            <summary>
+            Grava mensagem no arquivo de LOG
+            até que todas as exceções sejam tratadas
+            </summary>
+            <param name="ex">Exceção da criaçao do log</param>
+            <param name="datado">condiçao para datar o erro</param>
+        </member>
+        <member name="M:Sapiens.Library.Log.LogSistema.Log(System.String)">
+            <summary>
+            Grava mensagem no arquivo de LOG
+            sem data por mensagem
+            </summary>
+            <param name="message">mensagem de erro</param>
+        </member>
+        <member name="M:Sapiens.Library.Log.LogSistema.Log(System.String,System.Boolean)">
+            <summary>
+            Grava mensagem no arquivo de LOG 
+            com data para cada mensagem se DATADO = TRUE
+            </summary>
+            <param name="message">mensagem de erro</param>
+            <param name="datado">condiçao para datar o erro</param>
+        </member>
+        <member name="M:Sapiens.Library.Log.LogSistema.Log(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Grava mensagem no arquivo de LOG 
+            com data para cada mensagem se DATADO = TRUE
+            </summary>
+            <param name="message">mensagem de erro</param>
+            <param name="datado">condiçao para datar o erro</param>
+            <param name="savaDataBase">informa se o log será salvo em banco de dados ou arquivo texto.</param>
+            <exception cref="T:System.NotImplementedException">Se a propriedade do delegate SaveLogDatabase for nula.</exception>
+        </member>
+        <member name="M:Sapiens.Library.Log.LogSistema.SaveLogFile(System.String)">
+            <summary>
+            Salva a mensagem um arquivo texto.
+            </summary>
+            <param name="message">Mensagem do log</param>
+        </member>
+        <member name="P:Sapiens.Library.Log.LogSistema.SaveLogBD">
+            <summary>
+            Obtem e liga metodo para salvar log no banco de dados.
+            Caso esse metodo seja nulo e o log esteja configurado para
+            ser salvo no banco de dados, o exeção NotImplementedException
+            será gerado e o log será salvo em arquivo texto.
+            </summary>
+        </member>
+        <member name="T:Sapiens.Library.UtilBO">
+            <summary>
+            Classe para consumo de servicos utilitarios sistemas Scire
+            </summary>
+        </member>
+        <member name="M:Sapiens.Library.UtilBO.SerializaObjeto(System.Object,System.Type)">
+            <summary>
+            Serializa um objeto das classes do webserver
+            TRansforma esse objeto em um XML 
+            </summary>
+            <param name="objXML">Estância do objeto</param>
+            <param name="tipo">Tipo "getType"</param>
+            <returns>XML serializado</returns>
+        </member>
+        <member name="M:Sapiens.Library.UtilBO.DesserializarObjeto(System.Xml.XmlNode,System.Type)">
+            <summary>
+            Desserialziar um XML retornado do webservice
+            TRansforma um xml retorno em objeto serializavel
+            </summary>
+            <param name="XmlObjeto">XML retorno</param>
+            <param name="tipo">tipo do objeto</param>
+            <returns>Objeto generico que será tipado</returns>
+        </member>
+        <member name="M:Sapiens.Library.UtilBO.DesserializarObjeto(System.String,System.Type)">
+            <summary>
+            Desserialziar um XML retornado do webservice
+            TRansforma um xml retorno em objeto serializavel
+            </summary>
+            <param name="XmlCompleto">XML completo</param>
+            <param name="tipo">tipo do objeto</param>
+            <returns>Objeto generico que será tipado</returns>
+        </member>
+        <member name="M:Sapiens.Library.UtilBO.XMLparaDataSet(System.Xml.XmlNode)">
+            <summary>
+            Converte XML para estrutura de tabelas - DataSet
+            </summary>
+            <param name="XmlObjeto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sapiens.Library.UtilBO.XMLparaDataSet(System.String)">
+            <summary>
+            Converte XML para estrutura de tabelas - DataSet
+            </summary>
+            <param name="xmlCompleto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sapiens.Library.UtilBO.GravarArquivo(System.String,System.String)">
+            <summary>
+            Grava conteúdo texto em um arquivo novo
+            </summary>
+            <param name="sConteudoArquivo"></param>
+            <param name="NomeArquivo"></param>
+        </member>
+        <member name="M:Sapiens.Library.UtilBO.GetCertificado(System.String,System.String)">
+            <summary>
+            Busca certificados validos para emissão da MdFe
+            </summary>
+            <returns>DAdos completos do certificado pesquisado</returns>
+        </member>
+        <member name="M:Sapiens.Library.UtilBO.GetCertificado">
+            <summary>
+            Abre lista de certificados para selecionar
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sapiens.Library.UtilBO.Assinatura(System.Xml.XmlNode,System.String,System.String,System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+            Assinatura de arquivos XML
+            </summary>
+            <param name="noxml"></param>
+            <param name="sURI"></param>
+            <param name="sTagAssinatura"></param>
+            <param name="CertificadoValido"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sapiens.Library.UtilBO.DigitoModulo11(System.String)">
+            <summary>
+            Calcula digito verificador com Modulo 11
+            </summary>
+            <param name="strText">String com codigo</param>
+            <returns>Retorna digito</returns>
+        </member>
+        <member name="M:Sapiens.Library.UtilBO.EnderecoNro(System.String)">
+            <summary>
+            retira o nro de um campo de endereco
+            </summary>
+            <param name="endereco"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Sapiens.Library.CryptProvider">
+            <summary>
+            Enumerator com os tipos de classes para criptografia.
+            </summary>
+        </member>
+        <member name="F:Sapiens.Library.CryptProvider.Rijndael">
+            <summary>
+            Representa a classe base para implementações criptografia dos algoritmos simétricos Rijndael.
+            </summary>
+        </member>
+        <member name="F:Sapiens.Library.CryptProvider.RC2">
+            <summary>
+            Representa a classe base para implementações do algoritmo RC2.
+            </summary>
+        </member>
+        <member name="F:Sapiens.Library.CryptProvider.DES">
+            <summary>
+            Representa a classe base para criptografia de dados padrões (DES - Data Encryption Standard).
+            </summary>
+        </member>
+        <member name="F:Sapiens.Library.CryptProvider.TripleDES">
+            <summary>
+            Representa a classe base (TripleDES - Triple Data Encryption Standard).
+            </summary>
+        </member>
+        <member name="T:Sapiens.Library.CriptografiaSimetrica">
+            <summary>
+            Classe para criptografia
+            </summary>
+        </member>
+        <member name="M:Sapiens.Library.CriptografiaSimetrica.SetIV">
+            <summary>
+            Inicialização do vetor do algoritmo simétrico
+            </summary>
+        </member>
+        <member name="M:Sapiens.Library.CriptografiaSimetrica.#ctor">
+            <summary>
+            Contrutor padrão da classe, é setado um tipo de criptografia padrão (Rijndael).
+            </summary>
+        </member>
+        <member name="M:Sapiens.Library.CriptografiaSimetrica.#ctor(Sapiens.Library.CryptProvider)">
+            <summary>
+            Construtor com o tipo de criptografia a ser usada Você pode escolher o tipo pelo Enum chamado CryptProvider.
+            </summary>
+            <param name="cryptProvider">Tipo de criptografia.</param>
+        </member>
+        <member name="M:Sapiens.Library.CriptografiaSimetrica.GetKey">
+            <summary>
+            Gera a chave de criptografia válida dentro do array.
+            </summary>
+            <returns>Chave com array de bytes.</returns>
+        </member>
+        <member name="M:Sapiens.Library.CriptografiaSimetrica.Encrypt(System.String)">
+            <summary>
+            Encripta o dado solicitado.
+            </summary>
+            <param name="plainText">Texto a ser criptografado.</param>
+            <returns>Texto criptografado.</returns>
+        </member>
+        <member name="M:Sapiens.Library.CriptografiaSimetrica.Decrypt(System.String)">
+            <summary>
+            Desencripta o dado solicitado.
+            </summary>
+            <param name="cryptoText">Texto a ser descriptografado.</param>
+            <returns>Texto descriptografado.</returns>
+        </member>
+        <member name="P:Sapiens.Library.CriptografiaSimetrica.Key">
+            <summary>
+            Chave secreta para o algoritmo simétrico de criptografia.
+            </summary>
+        </member>
+        <member name="T:Sapiens.Library.Log.LogError">
+            <summary>
+            Classe para salvar log de erros.
+            A classe disponiliza duas opções:
+            Arquivo texto -  Salva arquivo texto em um diretório determinado pelo usuário.
+                             Quando o site estiver em cluster, ele procura no AppSettings 
+                             a variavel ClusterName para diferencia o nome do arquivo.
+                             Essa varivel normalmente será configurado no IIS.
+            Banco de dados - Salva o log de erro no banco de dados. O método para salvar
+                             o log no banco dados é um delegate para que seja possivel 
+                             adequar o método de salva a classe de banco de dados do 
+                             sistema.
+            </summary>
+        </member>
+        <member name="M:Sapiens.Library.Log.LogError.#ctor(System.String)">
+            <summary>
+            Construtor define o nome do arquivo de LOG de acordo com o parâmetro
+            </summary>
+            <param name="dirPath">diretório de gravaçao do arquivo de LOG</param>
+        </member>
+        <member name="M:Sapiens.Library.Log.LogError.GetErrorMessage(System.Exception)">
+            <summary>
+            Formata o erro.
+            </summary>
+            <param name="ex">Exceção</param>
+            <returns>String Formatada</returns>
+        </member>
+        <member name="M:Sapiens.Library.Log.LogError.Log(System.Exception,System.Boolean)">
+            <summary>
+            Grava mensagem no arquivo de LOG
+            até que todas as exceções sejam tratadas
+            </summary>
+            <param name="ex">Exceção da criaçao do log</param>
+            <param name="datado">condiçao para datar o erro</param>
+        </member>
+        <member name="M:Sapiens.Library.Log.LogError.Log(System.String)">
+            <summary>
+            Grava mensagem no arquivo de LOG
+            sem data por mensagem
+            </summary>
+            <param name="message">mensagem de erro</param>
+        </member>
+        <member name="M:Sapiens.Library.Log.LogError.Log(System.String,System.Boolean)">
+            <summary>
+            Grava mensagem no arquivo de LOG 
+            com data para cada mensagem se DATADO = TRUE
+            </summary>
+            <param name="message">mensagem de erro</param>
+            <param name="datado">condiçao para datar o erro</param>
+        </member>
+        <member name="M:Sapiens.Library.Log.LogError.Log(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Grava mensagem no arquivo de LOG 
+            com data para cada mensagem se DATADO = TRUE
+            </summary>
+            <param name="message">mensagem de erro</param>
+            <param name="datado">condiçao para datar o erro</param>
+            <param name="savaDataBase">informa se o log será salvo em banco de dados ou arquivo texto.</param>
+            <exception cref="T:System.NotImplementedException">Se a propriedade do delegate SaveLogDatabase for nula.</exception>
+        </member>
+        <member name="M:Sapiens.Library.Log.LogError.SaveLogFile(System.String)">
+            <summary>
+            Salva a mensagem um arquivo texto.
+            </summary>
+            <param name="message">Mensagem do log</param>
+        </member>
+        <member name="P:Sapiens.Library.Log.LogError.SaveLogBD">
+            <summary>
+            Obtem e liga metodo para salvar log no banco de dados.
+            Caso esse metodo seja nulo e o log esteja configurado para
+            ser salvo no banco de dados, o exeção NotImplementedException
+            será gerado e o log será salvo em arquivo texto.
+            </summary>
+        </member>
+    </members>
+</doc>

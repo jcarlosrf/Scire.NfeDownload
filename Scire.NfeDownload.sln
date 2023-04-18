@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33328.57
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scire.NfeDownload", "Aucom.NfeDownload\Scire.NfeDownload.csproj", "{FB023FB3-244C-4F42-9FDD-C67E5602E423}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scire.NFeManifestacao", "Aucom.NFeManifestacao\Scire.NFeManifestacao.csproj", "{1E5C20EB-E900-405B-8EBB-CD8DE7EE517F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB023FB3-244C-4F42-9FDD-C67E5602E423}.Debug|x86.ActiveCfg = Debug|x86
+		{FB023FB3-244C-4F42-9FDD-C67E5602E423}.Debug|x86.Build.0 = Debug|x86
+		{FB023FB3-244C-4F42-9FDD-C67E5602E423}.Release|x86.ActiveCfg = Release|x86
+		{FB023FB3-244C-4F42-9FDD-C67E5602E423}.Release|x86.Build.0 = Release|x86
+		{1E5C20EB-E900-405B-8EBB-CD8DE7EE517F}.Debug|x86.ActiveCfg = Debug|x86
+		{1E5C20EB-E900-405B-8EBB-CD8DE7EE517F}.Debug|x86.Build.0 = Debug|x86
+		{1E5C20EB-E900-405B-8EBB-CD8DE7EE517F}.Release|x86.ActiveCfg = Release|x86
+		{1E5C20EB-E900-405B-8EBB-CD8DE7EE517F}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7E38D121-9BB2-460D-A7DF-46AE4192CE40}
+	EndGlobalSection
+EndGlobal

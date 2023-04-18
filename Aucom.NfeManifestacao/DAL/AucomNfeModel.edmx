@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ScireNfes.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ScireNfesStoreContainer">
+          <EntitySet Name="destinatario" EntityType="ScireNfes.Store.destinatario" store:Type="Tables" Schema="Scirenfe" />
+          <EntitySet Name="fornecedor" EntityType="ScireNfes.Store.fornecedor" store:Type="Tables" Schema="Scirenfe" />
+          <EntitySet Name="nfe" EntityType="ScireNfes.Store.nfe" store:Type="Tables" Schema="Scirenfe" />
+          <EntitySet Name="nfe_dados" EntityType="ScireNfes.Store.nfe_dados" store:Type="Tables" Schema="Scirenfe" />
+          <EntitySet Name="tipo_evento" EntityType="ScireNfes.Store.tipo_evento" store:Type="Tables" Schema="Scirenfe" />
+          <AssociationSet Name="nfe_dados_ibfk_1" Association="ScireNfes.Store.nfe_dados_ibfk_1">
+            <End Role="nfe" EntitySet="nfe" />
+            <End Role="nfe_dados" EntitySet="nfe_dados" />
+          </AssociationSet>
+          <AssociationSet Name="nfe_ibfk_1" Association="ScireNfes.Store.nfe_ibfk_1">
+            <End Role="fornecedor" EntitySet="fornecedor" />
+            <End Role="nfe" EntitySet="nfe" />
+          </AssociationSet>
+        </EntityContainer>
+        <!--Errors Found During Generation:
+      warning 6035: The relationship 'nfe_ibfk_2' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+      -->
+        <EntityType Name="destinatario">
+          <Key>
+            <PropertyRef Name="id_destinatario" />
+          </Key>
+          <Property Name="id_destinatario" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="cnpj" Type="char" Nullable="false" MaxLength="14" />
+          <Property Name="razao" Type="varchar" Nullable="false" MaxLength="125" />
+          <Property Name="logradouro" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="numero" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="complemento" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="bairro" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="municipio" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="uf" Type="char" Nullable="false" MaxLength="2" />
+          <Property Name="cep" Type="char" Nullable="false" MaxLength="8" />
+          <Property Name="pais" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="fone" Type="char" Nullable="false" MaxLength="14" />
+          <Property Name="ie" Type="varchar" Nullable="false" MaxLength="14" />
+        </EntityType>
+        <EntityType Name="fornecedor">
+          <Key>
+            <PropertyRef Name="id_fornecedor" />
+          </Key>
+          <Property Name="id_fornecedor" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="cnpj" Type="varchar" Nullable="false" MaxLength="14" />
+          <Property Name="razao" Type="varchar" Nullable="false" MaxLength="125" />
+          <Property Name="logradouro" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="numero" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="complemento" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="bairro" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="municipio" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="uf" Type="char" Nullable="false" MaxLength="2" />
+          <Property Name="cep" Type="char" Nullable="false" MaxLength="8" />
+          <Property Name="pais" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="fone" Type="char" Nullable="false" MaxLength="14" />
+          <Property Name="ie" Type="varchar" Nullable="false" MaxLength="14" />
+          <Property Name="im" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="cnae" Type="char" Nullable="false" MaxLength="7" />
+          <Property Name="crt" Type="char" Nullable="false" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="nfe">
+          <Key>
+            <PropertyRef Name="id_nfe" />
+          </Key>
+          <Property Name="id_nfe" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="chave" Type="char" Nullable="false" MaxLength="44" />
+          <Property Name="destinatario" Type="char" MaxLength="14" />
+          <Property Name="fornecedor" Type="int" Nullable="false" />
+          <Property Name="data_hora" Type="datetime" Nullable="false" />
+          <Property Name="valor_total" Type="double" />
+          <Property Name="xml_nfe" Type="text" />
+        </EntityType>
+        <EntityType Name="nfe_dados">
+          <Key>
+            <PropertyRef Name="id_nfe_dados" />
+          </Key>
+          <Property Name="id_nfe_dados" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="nfe" Type="int" Nullable="false" />
+          <Property Name="operacao" Type="varchar" Nullable="false" MaxLength="8" />
+          <Property Name="protocolo" Type="char" Nullable="false" MaxLength="15" />
+          <Property Name="codigo" Type="char" MaxLength="3" />
+          <Property Name="tipo" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="data_sefaz" Type="datetime" Nullable="false" />
+          <Property Name="data_sistema" Type="datetime" Nullable="false" />
+          <Property Name="xml" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipo_evento">
+          <Key>
+            <PropertyRef Name="id_tipo" />
+          </Key>
+          <Property Name="id_tipo" Type="int" Nullable="false" />
+          <Property Name="tipo" Type="varchar" Nullable="false" MaxLength="27" />
+          <Property Name="just" Type="bool" Nullable="false" />
+        </EntityType>
+        <Association Name="nfe_dados_ibfk_1">
+          <End Role="nfe" Type="ScireNfes.Store.nfe" Multiplicity="1" />
+          <End Role="nfe_dados" Type="ScireNfes.Store.nfe_dados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nfe">
+              <PropertyRef Name="id_nfe" />
+            </Principal>
+            <Dependent Role="nfe_dados">
+              <PropertyRef Name="nfe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="nfe_ibfk_1">
+          <End Role="fornecedor" Type="ScireNfes.Store.fornecedor" Multiplicity="1" />
+          <End Role="nfe" Type="ScireNfes.Store.nfe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedor">
+              <PropertyRef Name="id_fornecedor" />
+            </Principal>
+            <Dependent Role="nfe">
+              <PropertyRef Name="fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="stp_NotasUltimoEvento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Scirenfe">
+          <Parameter Name="evento" Type="char" Mode="In" />
+          <Parameter Name="temxml" Type="tinyint" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ScireNfes" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="ScireNfeEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="stp_NotasUltimoEvento" ReturnType="Collection(ScireNfes.stp_NotasUltimoEvento_Result)">
+            <Parameter Name="evento" Mode="In" Type="String" />
+            <Parameter Name="temxml" Mode="In" Type="SByte" />
+          </FunctionImport>
+          <EntitySet Name="destinatario" EntityType="ScireNfes.destinatario" />
+          <EntitySet Name="fornecedor" EntityType="ScireNfes.fornecedor" />
+          <EntitySet Name="nfe" EntityType="ScireNfes.nfe" />
+          <EntitySet Name="nfe_dados" EntityType="ScireNfes.nfe_dados" />
+          <EntitySet Name="tipo_evento" EntityType="ScireNfes.tipo_evento" />
+          <AssociationSet Name="nfe_ibfk_1" Association="ScireNfes.nfe_ibfk_1">
+            <End Role="fornecedor" EntitySet="fornecedor" />
+            <End Role="nfe" EntitySet="nfe" />
+          </AssociationSet>
+          <AssociationSet Name="nfe_dados_ibfk_1" Association="ScireNfes.nfe_dados_ibfk_1">
+            <End Role="nfe" EntitySet="nfe" />
+            <End Role="nfe_dados" EntitySet="nfe_dados" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="stp_NotasUltimoEvento_Result" >
+          <Property Type="String" Name="chave" Nullable="false" />
+          <Property Type="String" Name="xml_nfe" />
+        </ComplexType>
+        <EntityType Name="destinatario">
+          <Key>
+            <PropertyRef Name="id_destinatario" />
+          </Key>
+          <Property Type="Int32" Name="id_destinatario" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="cnpj" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="razao" Nullable="false" MaxLength="125" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="logradouro" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="numero" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="complemento" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="bairro" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="municipio" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="uf" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="cep" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="pais" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="fone" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ie" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="fornecedor">
+          <Key>
+            <PropertyRef Name="id_fornecedor" />
+          </Key>
+          <Property Type="Int32" Name="id_fornecedor" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="cnpj" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="razao" Nullable="false" MaxLength="125" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="logradouro" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="numero" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="complemento" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="bairro" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="municipio" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="uf" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="cep" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="pais" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="fone" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ie" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="im" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="cnae" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="crt" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="nfe" Relationship="ScireNfes.nfe_ibfk_1" FromRole="fornecedor" ToRole="nfe" />
+        </EntityType>
+        <EntityType Name="nfe">
+          <Key>
+            <PropertyRef Name="id_nfe" />
+          </Key>
+          <Property Type="Int32" Name="id_nfe" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="chave" Nullable="false" MaxLength="44" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="destinatario" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="fornecedor" Nullable="false" />
+          <Property Type="DateTime" Name="data_hora" Nullable="false" />
+          <Property Type="Double" Name="valor_total" />
+          <Property Type="String" Name="xml_nfe" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="fornecedor1" Relationship="ScireNfes.nfe_ibfk_1" FromRole="nfe" ToRole="fornecedor" />
+          <NavigationProperty Name="nfe_dados" Relationship="ScireNfes.nfe_dados_ibfk_1" FromRole="nfe" ToRole="nfe_dados" />
+        </EntityType>
+        <EntityType Name="nfe_dados">
+          <Key>
+            <PropertyRef Name="id_nfe_dados" />
+          </Key>
+          <Property Type="Int32" Name="id_nfe_dados" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="nfe" Nullable="false" />
+          <Property Type="String" Name="operacao" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="protocolo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="codigo" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="tipo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="data_sefaz" Nullable="false" />
+          <Property Type="DateTime" Name="data_sistema" Nullable="false" />
+          <Property Type="String" Name="xml" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="nfe1" Relationship="ScireNfes.nfe_dados_ibfk_1" FromRole="nfe_dados" ToRole="nfe" />
+        </EntityType>
+        <EntityType Name="tipo_evento">
+          <Key>
+            <PropertyRef Name="id_tipo" />
+          </Key>
+          <Property Type="Int32" Name="id_tipo" Nullable="false" />
+          <Property Type="String" Name="tipo" Nullable="false" MaxLength="27" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="just" Nullable="false" />
+        </EntityType>
+        <Association Name="nfe_ibfk_1">
+          <End Type="ScireNfes.fornecedor" Role="fornecedor" Multiplicity="1" />
+          <End Type="ScireNfes.nfe" Role="nfe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fornecedor">
+              <PropertyRef Name="id_fornecedor" />
+            </Principal>
+            <Dependent Role="nfe">
+              <PropertyRef Name="fornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="nfe_dados_ibfk_1">
+          <End Type="ScireNfes.nfe" Role="nfe" Multiplicity="1" />
+          <End Type="ScireNfes.nfe_dados" Role="nfe_dados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nfe">
+              <PropertyRef Name="id_nfe" />
+            </Principal>
+            <Dependent Role="nfe_dados">
+              <PropertyRef Name="nfe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ScireNfesStoreContainer" CdmEntityContainer="ScireNfeEntities">
+          <FunctionImportMapping FunctionImportName="stp_NotasUltimoEvento" FunctionName="ScireNfes.Store.stp_NotasUltimoEvento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ScireNfes.stp_NotasUltimoEvento_Result" />
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="destinatario">
+            <EntityTypeMapping TypeName="ScireNfes.destinatario">
+              <MappingFragment StoreEntitySet="destinatario">
+                <ScalarProperty Name="ie" ColumnName="ie" />
+                <ScalarProperty Name="fone" ColumnName="fone" />
+                <ScalarProperty Name="pais" ColumnName="pais" />
+                <ScalarProperty Name="cep" ColumnName="cep" />
+                <ScalarProperty Name="uf" ColumnName="uf" />
+                <ScalarProperty Name="municipio" ColumnName="municipio" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="complemento" ColumnName="complemento" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="logradouro" ColumnName="logradouro" />
+                <ScalarProperty Name="razao" ColumnName="razao" />
+                <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+                <ScalarProperty Name="id_destinatario" ColumnName="id_destinatario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fornecedor">
+            <EntityTypeMapping TypeName="ScireNfes.fornecedor">
+              <MappingFragment StoreEntitySet="fornecedor">
+                <ScalarProperty Name="crt" ColumnName="crt" />
+                <ScalarProperty Name="cnae" ColumnName="cnae" />
+                <ScalarProperty Name="im" ColumnName="im" />
+                <ScalarProperty Name="ie" ColumnName="ie" />
+                <ScalarProperty Name="fone" ColumnName="fone" />
+                <ScalarProperty Name="pais" ColumnName="pais" />
+                <ScalarProperty Name="cep" ColumnName="cep" />
+                <ScalarProperty Name="uf" ColumnName="uf" />
+                <ScalarProperty Name="municipio" ColumnName="municipio" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="complemento" ColumnName="complemento" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="logradouro" ColumnName="logradouro" />
+                <ScalarProperty Name="razao" ColumnName="razao" />
+                <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+                <ScalarProperty Name="id_fornecedor" ColumnName="id_fornecedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nfe">
+            <EntityTypeMapping TypeName="ScireNfes.nfe">
+              <MappingFragment StoreEntitySet="nfe">
+                <ScalarProperty Name="xml_nfe" ColumnName="xml_nfe" />
+                <ScalarProperty Name="valor_total" ColumnName="valor_total" />
+                <ScalarProperty Name="data_hora" ColumnName="data_hora" />
+                <ScalarProperty Name="fornecedor" ColumnName="fornecedor" />
+                <ScalarProperty Name="destinatario" ColumnName="destinatario" />
+                <ScalarProperty Name="chave" ColumnName="chave" />
+                <ScalarProperty Name="id_nfe" ColumnName="id_nfe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nfe_dados">
+            <EntityTypeMapping TypeName="ScireNfes.nfe_dados">
+              <MappingFragment StoreEntitySet="nfe_dados">
+                <ScalarProperty Name="xml" ColumnName="xml" />
+                <ScalarProperty Name="data_sistema" ColumnName="data_sistema" />
+                <ScalarProperty Name="data_sefaz" ColumnName="data_sefaz" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="protocolo" ColumnName="protocolo" />
+                <ScalarProperty Name="operacao" ColumnName="operacao" />
+                <ScalarProperty Name="nfe" ColumnName="nfe" />
+                <ScalarProperty Name="id_nfe_dados" ColumnName="id_nfe_dados" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_evento">
+            <EntityTypeMapping TypeName="ScireNfes.tipo_evento">
+              <MappingFragment StoreEntitySet="tipo_evento">
+                <ScalarProperty Name="just" ColumnName="just" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="id_tipo" ColumnName="id_tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="DDLGenerationTemplate" Value="$(VSEFTools)\DBGen\SSDLToMySQL.tt" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="ScireNfeModel">
+        <EntityTypeShape EntityType="ScireNfes.destinatario" Width="1.5" PointX="3" PointY="5.625" Height="3.5186979166666674" />
+        <EntityTypeShape EntityType="ScireNfes.fornecedor" Width="1.5" PointX="0.75" PointY="1" Height="4.2879036458333317" />
+        <EntityTypeShape EntityType="ScireNfes.nfe" Width="1.5" PointX="3" PointY="1.75" Height="2.7494921874999996" />
+        <EntityTypeShape EntityType="ScireNfes.nfe_dados" Width="1.5" PointX="5.25" PointY="1.75" Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="ScireNfes.tipo_evento" Width="1.5" PointX="5.25" PointY="5.625" Height="1.5956835937499996" />
+        <AssociationConnector Association="ScireNfes.nfe_ibfk_1" >
+          <ConnectorPoint PointX="2.25" PointY="3.12474609375" />
+          <ConnectorPoint PointX="3" PointY="3.12474609375" />
+        </AssociationConnector>
+        <AssociationConnector Association="ScireNfes.nfe_dados_ibfk_1" >
+          <ConnectorPoint PointX="4.5" PointY="3.12474609375" />
+          <ConnectorPoint PointX="5.25" PointY="3.12474609375" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

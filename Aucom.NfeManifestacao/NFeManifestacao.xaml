@@ -1,0 +1,157 @@
+﻿<Window x:Class="Scire.NFeManifestacao.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Scire - NFe Manifestação"
+        Height="850" Width="1100" 
+        ContentRendered="Window_ContentRendered" 
+        WindowStartupLocation="CenterScreen" 
+        WindowState="Maximized" Icon="/Scire.NFeManifestacao;component/Images/if_1_1173392.ico">
+ 
+    <Border Padding="10">
+        <Grid FlowDirection="LeftToRight">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="9*" />
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Padding="4" Background="#f8f8f8" BorderBrush="Gainsboro" BorderThickness="1">
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Destinatário:" Grid.Row="1" Grid.Column="0"/>
+                <ComboBox x:Name="CbxDestinatario" Grid.Row="1" Grid.Column="1" 
+                          SelectionChanged="CbxDestinatario_SelectionChanged" Padding="5"
+                          SelectedValuePath="cnpj" DisplayMemberPath="razao" />
+            
+                <Label Content="Data Inicio:" Grid.Row="1" Grid.Column="2"/>
+                <DatePicker x:Name="TxtPDataInicio" Grid.Row="1" Grid.Column="3"/>
+                <Label Content="Data Final:" Grid.Row="1" Grid.Column="4"/>
+                <DatePicker x:Name="TxtPDataFinal" Grid.Row="1" Grid.Column="5"/>
+
+                <Label Content="Fornecedor:" Grid.Row="3" Grid.Column="0"/>
+                <ComboBox x:Name="CbxFornecedor" Grid.Row="3" Grid.Column="1" SelectionChanged="CbxFornecedor_SelectionChanged" Padding="5" SelectedValuePath="cnpj" DisplayMemberPath="razao" />
+
+                <Button x:Name="BtnFiltrar" Content="Filtrar" Width="130" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="6" Click="BtnFiltrar_Click"/>
+                <Button x:Name="BtnAtualizar" Content="Buscar Novas Notas" HorizontalAlignment="Center" Width="130" Grid.Row="3" Grid.Column="6" Click="BtnAtualizar_Click"/>
+            </Grid>
+            </Border>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.35*"/>
+                    <ColumnDefinition Width="0.01*"/>
+                    <ColumnDefinition Width="0.65*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!--<Label Content="Fornecedores" FontSize="28"/>-->
+                <TreeView Name="TrvFornecedor" SelectedItemChanged="TrvFornecedor_SelectedItemChanged" Grid.Row="1" Grid.Column="0"
+                        Height="AUTO" Width="AUTO" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                          BorderBrush="Gainsboro" Background="#f8f8f8"/>
+                <Border Grid.Column="2" Padding="4" Background="#f8f8f8" BorderBrush="Gainsboro" BorderThickness="1">
+                <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="0"/>
+                    <RowDefinition Height="400*"/>
+                    <RowDefinition Height="40"/>
+
+
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                    <Label Content="Nota" FontSize="28" Grid.Row="0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Chave:" FontSize="18" Grid.Row="1"/>
+                        <Label x:Name="LblChave" FontSize="18" Grid.Row="1"/>
+                    </StackPanel>
+                </StackPanel>
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="CNPJ/CPF do Fornecedor:" FontSize="16" Grid.Row="0" Grid.Column="0"/>
+                    <Label x:Name="LblCnpjFornecededor" FontSize="16" Grid.Row="0" Grid.Column="2"/>
+                    <Label Content=":" FontSize="16" Grid.Row="0" Grid.Column="1"/>
+                    <Label Content="Razão/Nome do Fornecedor:" FontSize="16" Grid.Row="1"/>
+                    <Label Content=":" FontSize="16" Grid.Row="1" Grid.Column="1"/>
+                    <Label x:Name="LblRazaoFornecedor" FontSize="16" Grid.Row="1" Grid.Column="2"/>
+                    <Label Content="Inscrição Estadual:" FontSize="16" Grid.Row="2"/>
+                    <Label x:Name="LblIE" FontSize="16" Grid.Row="2" Grid.Column="2"/>
+                    <Label Content=":" FontSize="16" Grid.Row="2" Grid.Column="1"/>
+
+                    <Label Content="CNPJ/CPF do Destinatário:" FontSize="16" Grid.Row="3"/>
+                    <Label x:Name="LblCnpjDestinatario" FontSize="16" Grid.Row="3" Grid.Column="2"/>
+                    <Label Content=":" FontSize="16" Grid.Row="3" Grid.Column="1"/>
+                    <Label Content="Razão/Nome do Destinatário:" FontSize="16" Grid.Row="4"/>
+                    <Label x:Name="LblRazaoDestinatario" FontSize="16" Grid.Row="4" Grid.Column="2"/>
+                    <Label Content=":" FontSize="16" Grid.Row="4" Grid.Column="1"/>
+
+                    <Label Content="Data de Emissão:" FontSize="16" Grid.Row="5"/>
+                    <Label x:Name="LblDataEmissao" FontSize="16" Grid.Row="5" Grid.Column="2"/>
+                    <Label Content=":" FontSize="16" Grid.Row="5" Grid.Column="1"/>
+
+                    <Label Content="Valor Total:" FontSize="16" Grid.Row="6"/>
+                    <Label Content=":" FontSize="16" Grid.Row="6" Grid.Column="1"/>
+                    <Label x:Name="LblValorTotal" FontSize="16" Grid.Row="6" Grid.Column="2"/>
+
+                    <!-- colocar data autorização -->
+
+                    <Label Content="Protoloco:" FontSize="16" Grid.Row="7"/>
+                    <Label Content=":" FontSize="16" Grid.Row="7" Grid.Column="1"/>
+                    <Label x:Name="LblProtocolo" FontSize="16" Grid.Row="7" Grid.Column="2"/>
+
+                    <!-- Pensar na situação -->
+                    <Label Content="Evento:" FontSize="16" Grid.Row="8" Grid.Column="0"/>
+                    <Label Content=":" FontSize="16" Grid.Row="8" Grid.Column="1"/>
+                    <ComboBox x:Name="CbxEvento" SelectionChanged="CbxEvento_SelectionChanged"
+                        Height="30" Grid.Row="8" Grid.Column="2"/>
+
+                    <Label Content="Justificativa:" FontSize="16" Grid.Row="9" Grid.Column="0"/>
+                    <Label Content=":" FontSize="16" Grid.Row="9" Grid.Column="1"/>
+                    <TextBox x:Name="TxtJust" Grid.Row="9" Grid.Column="2" TextChanged="TxtJust_TextChanged"/>
+                </Grid>
+                <Button x:Name="BtnManifestar" Content="Manifestar" Click="BtnManifestar_Click" IsEnabled="False" Grid.Row="3" 
+                        HorizontalAlignment="Center" MinWidth="300" VerticalAlignment="Stretch"/>
+                
+            </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

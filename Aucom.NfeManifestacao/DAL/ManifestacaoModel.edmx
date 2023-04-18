@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ManifestaModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ManifestaModelStoreContainer">
+          <EntitySet Name="nfe" EntityType="ManifestaModel.Store.nfe" store:Type="Tables" Schema="jalovi" />
+          <EntitySet Name="nfe_evento" EntityType="ManifestaModel.Store.nfe_evento" store:Type="Tables" Schema="jalovi" />
+          <EntitySet Name="nfe_fornecedor" EntityType="ManifestaModel.Store.nfe_fornecedor" store:Type="Tables" Schema="jalovi" />
+          <EntitySet Name="situacao_nfe" EntityType="ManifestaModel.Store.situacao_nfe" store:Type="Tables" Schema="jalovi" />
+          <EntitySet Name="tipo_evento" EntityType="ManifestaModel.Store.tipo_evento" store:Type="Tables" Schema="jalovi" />
+          <EntitySet Name="uptabelas" EntityType="ManifestaModel.Store.uptabelas" store:Type="Tables" Schema="jalovi" />
+          <AssociationSet Name="nfe_evento_ibfk_2" Association="ManifestaModel.Store.nfe_evento_ibfk_2">
+            <End Role="tipo_evento" EntitySet="tipo_evento" />
+            <End Role="nfe_evento" EntitySet="nfe_evento" />
+          </AssociationSet>
+          <AssociationSet Name="nfe_ibfk_2" Association="ManifestaModel.Store.nfe_ibfk_2">
+            <End Role="situacao_nfe" EntitySet="situacao_nfe" />
+            <End Role="nfe" EntitySet="nfe" />
+          </AssociationSet>
+        </EntityContainer>
+        <!--Errors Found During Generation:
+      warning 6035: The relationship 'nfe_evento_ibfk_1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+      -->
+        <EntityType Name="nfe">
+          <Key>
+            <PropertyRef Name="chave" />
+            <PropertyRef Name="fornecedor" />
+          </Key>
+          <Property Name="chave" Type="char" Nullable="false" MaxLength="44" />
+          <Property Name="fornecedor" Type="varchar" Nullable="false" MaxLength="14" />
+          <Property Name="valorTotal" Type="double" />
+          <Property Name="dataAutorizada" Type="datetime" />
+          <Property Name="protocolo" Type="bigint" />
+          <Property Name="situacao" Type="int" />
+          <Property Name="UF" Type="char" MaxLength="2" />
+          <Property Name="nfeXml" Type="text" />
+        </EntityType>
+        <EntityType Name="nfe_evento">
+          <Key>
+            <PropertyRef Name="chave" />
+          </Key>
+          <Property Name="chave" Type="char" Nullable="false" MaxLength="44" />
+          <Property Name="lote" Type="int" />
+          <Property Name="motivo" Type="varchar" MaxLength="40" />
+          <Property Name="email" Type="varchar" MaxLength="70" />
+          <Property Name="dataEvento" Type="datetime" Nullable="false" />
+          <Property Name="protocolo" Type="bigint" />
+          <Property Name="resposta" Type="varchar" MaxLength="20" />
+          <Property Name="tipoEvento" Type="int" />
+          <Property Name="UF" Type="char" MaxLength="2" />
+          <Property Name="eventoXml" Type="text" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6035: The relationship 'nfe_ibfk_1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+      -->
+        <EntityType Name="nfe_fornecedor">
+          <Key>
+            <PropertyRef Name="documento" />
+            <PropertyRef Name="razao" />
+          </Key>
+          <Property Name="documento" Type="varchar" Nullable="false" MaxLength="14" />
+          <Property Name="razao" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="ie" Type="varchar" Nullable="false" MaxLength="12" />
+          <Property Name="dataCadastro" Type="datetime" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="situacao_nfe">
+          <Key>
+            <PropertyRef Name="id_situacao" />
+          </Key>
+          <Property Name="id_situacao" Type="int" Nullable="false" />
+          <Property Name="situacao" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="tipo_evento">
+          <Key>
+            <PropertyRef Name="id_tipo" />
+          </Key>
+          <Property Name="id_tipo" Type="int" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="27" />
+          <Property Name="just" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="uptabelas">
+          <Key>
+            <PropertyRef Name="sequencia" />
+          </Key>
+          <Property Name="sequencia" Type="ubigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="local" Type="char" MaxLength="2" />
+          <Property Name="comando" Type="text" />
+          <Property Name="dia" Type="date" />
+          <Property Name="hora" Type="varchar" MaxLength="8" />
+          <Property Name="status" Type="char" MaxLength="1" />
+          <Property Name="priori" Type="uint" />
+          <Property Name="usuario" Type="char" MaxLength="4" />
+        </EntityType>
+        <Association Name="nfe_evento_ibfk_2">
+          <End Role="tipo_evento" Type="ManifestaModel.Store.tipo_evento" Multiplicity="0..1" />
+          <End Role="nfe_evento" Type="ManifestaModel.Store.nfe_evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_evento">
+              <PropertyRef Name="id_tipo" />
+            </Principal>
+            <Dependent Role="nfe_evento">
+              <PropertyRef Name="tipoEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="nfe_ibfk_2">
+          <End Role="situacao_nfe" Type="ManifestaModel.Store.situacao_nfe" Multiplicity="0..1" />
+          <End Role="nfe" Type="ManifestaModel.Store.nfe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="situacao_nfe">
+              <PropertyRef Name="id_situacao" />
+            </Principal>
+            <Dependent Role="nfe">
+              <PropertyRef Name="situacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ManifestaModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="manifestaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="uptabelas" EntityType="ManifestaModel.uptabelas" />
+          <EntitySet Name="nfe" EntityType="ManifestaModel.nfe" />
+          <EntitySet Name="nfe_evento" EntityType="ManifestaModel.nfe_evento" />
+          <EntitySet Name="nfe_fornecedor" EntityType="ManifestaModel.nfe_fornecedor" />
+          <EntitySet Name="situacao_nfe" EntityType="ManifestaModel.situacao_nfe" />
+          <EntitySet Name="tipo_evento" EntityType="ManifestaModel.tipo_evento" />
+          <AssociationSet Name="nfe_ibfk_2" Association="ManifestaModel.nfe_ibfk_2">
+            <End Role="situacao_nfe" EntitySet="situacao_nfe" />
+            <End Role="nfe" EntitySet="nfe" />
+          </AssociationSet>
+          <AssociationSet Name="nfe_evento_ibfk_2" Association="ManifestaModel.nfe_evento_ibfk_2">
+            <End Role="tipo_evento" EntitySet="tipo_evento" />
+            <End Role="nfe_evento" EntitySet="nfe_evento" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="uptabelas">
+          <Key>
+            <PropertyRef Name="sequencia" />
+          </Key>
+          <Property Type="Decimal" Name="sequencia" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="local" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="comando" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="dia" />
+          <Property Type="String" Name="hora" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="status" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="Int64" Name="priori" />
+          <Property Type="String" Name="usuario" MaxLength="4" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="nfe">
+          <Key>
+            <PropertyRef Name="chave" />
+            <PropertyRef Name="fornecedor" />
+          </Key>
+          <Property Type="String" Name="chave" Nullable="false" MaxLength="44" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="fornecedor" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Type="Double" Name="valorTotal" />
+          <Property Type="DateTime" Name="dataAutorizada" />
+          <Property Type="Int64" Name="protocolo" />
+          <Property Type="Int32" Name="situacao" />
+          <Property Type="String" Name="UF" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="nfeXml" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="situacao_nfe" Relationship="ManifestaModel.nfe_ibfk_2" FromRole="nfe" ToRole="situacao_nfe" />
+        </EntityType>
+        <EntityType Name="nfe_evento">
+          <Key>
+            <PropertyRef Name="chave" />
+          </Key>
+          <Property Type="String" Name="chave" Nullable="false" MaxLength="44" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="lote" />
+          <Property Type="String" Name="motivo" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="email" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="dataEvento" Nullable="false" />
+          <Property Type="Int64" Name="protocolo" />
+          <Property Type="String" Name="resposta" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="tipoEvento" />
+          <Property Type="String" Name="UF" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="eventoXml" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tipo_evento" Relationship="ManifestaModel.nfe_evento_ibfk_2" FromRole="nfe_evento" ToRole="tipo_evento" />
+        </EntityType>
+        <EntityType Name="nfe_fornecedor">
+          <Key>
+            <PropertyRef Name="documento" />
+            <PropertyRef Name="razao" />
+          </Key>
+          <Property Type="String" Name="documento" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="razao" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ie" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="dataCadastro" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="situacao_nfe">
+          <Key>
+            <PropertyRef Name="id_situacao" />
+          </Key>
+          <Property Type="Int32" Name="id_situacao" Nullable="false" />
+          <Property Type="String" Name="situacao" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="nfe" Relationship="ManifestaModel.nfe_ibfk_2" FromRole="situacao_nfe" ToRole="nfe" />
+        </EntityType>
+        <EntityType Name="tipo_evento">
+          <Key>
+            <PropertyRef Name="id_tipo" />
+          </Key>
+          <Property Type="Int32" Name="id_tipo" Nullable="false" />
+          <Property Type="String" Name="tipo" MaxLength="27" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="just" Nullable="false" />
+          <NavigationProperty Name="nfe_evento" Relationship="ManifestaModel.nfe_evento_ibfk_2" FromRole="tipo_evento" ToRole="nfe_evento" />
+        </EntityType>
+        <Association Name="nfe_ibfk_2">
+          <End Type="ManifestaModel.situacao_nfe" Role="situacao_nfe" Multiplicity="0..1" />
+          <End Type="ManifestaModel.nfe" Role="nfe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="situacao_nfe">
+              <PropertyRef Name="id_situacao" />
+            </Principal>
+            <Dependent Role="nfe">
+              <PropertyRef Name="situacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="nfe_evento_ibfk_2">
+          <End Type="ManifestaModel.tipo_evento" Role="tipo_evento" Multiplicity="0..1" />
+          <End Type="ManifestaModel.nfe_evento" Role="nfe_evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_evento">
+              <PropertyRef Name="id_tipo" />
+            </Principal>
+            <Dependent Role="nfe_evento">
+              <PropertyRef Name="tipoEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ManifestaModelStoreContainer" CdmEntityContainer="manifestaEntities">
+          <EntitySetMapping Name="uptabelas">
+            <EntityTypeMapping TypeName="ManifestaModel.uptabelas">
+              <MappingFragment StoreEntitySet="uptabelas">
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="priori" ColumnName="priori" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="dia" ColumnName="dia" />
+                <ScalarProperty Name="comando" ColumnName="comando" />
+                <ScalarProperty Name="local" ColumnName="local" />
+                <ScalarProperty Name="sequencia" ColumnName="sequencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nfe">
+            <EntityTypeMapping TypeName="ManifestaModel.nfe">
+              <MappingFragment StoreEntitySet="nfe">
+                <ScalarProperty Name="nfeXml" ColumnName="nfeXml" />
+                <ScalarProperty Name="UF" ColumnName="UF" />
+                <ScalarProperty Name="situacao" ColumnName="situacao" />
+                <ScalarProperty Name="protocolo" ColumnName="protocolo" />
+                <ScalarProperty Name="dataAutorizada" ColumnName="dataAutorizada" />
+                <ScalarProperty Name="valorTotal" ColumnName="valorTotal" />
+                <ScalarProperty Name="fornecedor" ColumnName="fornecedor" />
+                <ScalarProperty Name="chave" ColumnName="chave" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nfe_evento">
+            <EntityTypeMapping TypeName="ManifestaModel.nfe_evento">
+              <MappingFragment StoreEntitySet="nfe_evento">
+                <ScalarProperty Name="eventoXml" ColumnName="eventoXml" />
+                <ScalarProperty Name="UF" ColumnName="UF" />
+                <ScalarProperty Name="tipoEvento" ColumnName="tipoEvento" />
+                <ScalarProperty Name="resposta" ColumnName="resposta" />
+                <ScalarProperty Name="protocolo" ColumnName="protocolo" />
+                <ScalarProperty Name="dataEvento" ColumnName="dataEvento" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="motivo" ColumnName="motivo" />
+                <ScalarProperty Name="lote" ColumnName="lote" />
+                <ScalarProperty Name="chave" ColumnName="chave" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nfe_fornecedor">
+            <EntityTypeMapping TypeName="ManifestaModel.nfe_fornecedor">
+              <MappingFragment StoreEntitySet="nfe_fornecedor">
+                <ScalarProperty Name="dataCadastro" ColumnName="dataCadastro" />
+                <ScalarProperty Name="ie" ColumnName="ie" />
+                <ScalarProperty Name="razao" ColumnName="razao" />
+                <ScalarProperty Name="documento" ColumnName="documento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="situacao_nfe">
+            <EntityTypeMapping TypeName="ManifestaModel.situacao_nfe">
+              <MappingFragment StoreEntitySet="situacao_nfe">
+                <ScalarProperty Name="situacao" ColumnName="situacao" />
+                <ScalarProperty Name="id_situacao" ColumnName="id_situacao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_evento">
+            <EntityTypeMapping TypeName="ManifestaModel.tipo_evento">
+              <MappingFragment StoreEntitySet="tipo_evento">
+                <ScalarProperty Name="just" ColumnName="just" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="id_tipo" ColumnName="id_tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="ManifestacaoModel" ZoomLevel="89">
+        <EntityTypeShape EntityType="ManifestaModel.uptabelas" Width="1.5" PointX="0.75" PointY="5.25" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="ManifestaModel.nfe" Width="1.5" PointX="8" PointY="1" Height="2.7494921875000031" />
+        <EntityTypeShape EntityType="ManifestaModel.nfe_evento" Width="1.5" PointX="3" PointY="1" Height="3.1340950520833388" />
+        <EntityTypeShape EntityType="ManifestaModel.nfe_fornecedor" Width="1.5" PointX="3.75" PointY="5.75" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="ManifestaModel.situacao_nfe" Width="1.5" PointX="5.75" PointY="1.5" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="ManifestaModel.tipo_evento" Width="1.5" PointX="0.75" PointY="1.625" Height="1.7879850260416674" />
+        <AssociationConnector Association="ManifestaModel.nfe_ibfk_2" >
+          <ConnectorPoint PointX="7.25" PointY="2.2978417968750016" />
+          <ConnectorPoint PointX="8" PointY="2.2978417968750016" />
+        </AssociationConnector>
+        <AssociationConnector Association="ManifestaModel.nfe_evento_ibfk_2" >
+          <ConnectorPoint PointX="2.25" PointY="2.5189925130208337" />
+          <ConnectorPoint PointX="3" PointY="2.5189925130208337" />
+        </AssociationConnector>
+        </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

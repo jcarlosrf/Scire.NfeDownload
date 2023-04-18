@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1E5C20EB-E900-405B-8EBB-CD8DE7EE517F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Aucom.NFeManifestacao</RootNamespace>
+    <AssemblyName>Aucom.NFeManifestacao</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="Sapiens.Library, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Library\Sapiens.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Aguarde.xaml.cs">
+      <DependentUpon>Aguarde.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BLL\Dados.cs" />
+    <Compile Include="BLL\DistBO.cs" />
+    <Compile Include="BLL\Evento.cs" />
+    <Compile Include="BLL\ManifestacaoBO.cs" />
+    <Compile Include="BLL\Mdfe.cs" />
+    <Compile Include="BLL\MdfeBO.cs" />
+    <Compile Include="BLL\NotaFornecedor.cs" />
+    <Compile Include="DAL\AbstractDAO.cs" />
+    <Compile Include="DAL\AucomNfeModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AucomNfeModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Conexao\ConexaoBD.cs" />
+    <Compile Include="DAL\DestinatarioDAO.cs" />
+    <Compile Include="DAL\Interface\IAbstractDAO.cs" />
+    <Compile Include="DAL\NfeDadosDAO.cs" />
+    <Compile Include="DAL\NfeDAO.cs" />
+    <Compile Include="DAL\FornecedorDAO.cs" />
+    <Compile Include="DAL\TipoEventoDAO.cs" />
+    <Compile Include="IUtilBO.cs" />
+    <Compile Include="Service References\NfeDistribuicaoServ\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\RecepcaoEventoServ\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\wsRecepcaoEvento100\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Util.cs" />
+    <Compile Include="XSDs\Download\distDFeInt_v1_01.cs" />
+    <Compile Include="XSDs\Download\retDistDFeInt_v1_01.cs" />
+    <Compile Include="XSDs\Manifestacao\envConfRecebto_retEnvConfRecebto.cs" />
+    <Page Include="Aguarde.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NFeManifestacao.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NFeManifestacao.xaml.cs">
+      <DependentUpon>NFeManifestacao.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="DAL\AucomNfeModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AucomNfeModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Doc\Manual_de_Orientacao_Contribuinte_v_6.00.pdf" />
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\System.Xml.Linq.XElement.datasource" />
+    <None Include="Properties\DataSources\System.Xml.XmlNode.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Service References\NfeDistribuicaoServ\NFeDistribuicaoDFe.wsdl" />
+    <None Include="Service References\RecepcaoEventoServ\NFeRecepcaoEvento4.wsdl" />
+    <None Include="Service References\wsRecepcaoEvento100\RecepcaoEvento.wsdl" />
+    <None Include="XSDs\Download\distDFeInt_v1.01.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSDs\Download\retDistDFeInt_v1.01.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSDs\Manifestacao\envConfRecebto_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSDs\Manifestacao\retEnvConfRecebto_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSDs\Manifestacao\xmldsig-core-schema_v1.01.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Doc\Guidance.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\if_1_1173392.ico" />
+    <Content Include="Library\Sapiens.Library.dll" />
+    <Resource Include="XMLFile1.xml">
+      <SubType>Designer</SubType>
+    </Resource>
+    <None Include="Service References\NfeDistribuicaoServ\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\NfeDistribuicaoServ\configuration.svcinfo" />
+    <None Include="Service References\NfeDistribuicaoServ\configuration91.svcinfo" />
+    <None Include="Service References\NfeDistribuicaoServ\NFeDistribuicaoDFe.disco" />
+    <None Include="Service References\RecepcaoEventoServ\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\RecepcaoEventoServ\configuration.svcinfo" />
+    <None Include="Service References\RecepcaoEventoServ\configuration91.svcinfo" />
+    <None Include="Service References\RecepcaoEventoServ\NFeRecepcaoEvento4.disco" />
+    <None Include="Service References\wsRecepcaoEvento100\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\wsRecepcaoEvento100\configuration.svcinfo" />
+    <None Include="Service References\wsRecepcaoEvento100\configuration91.svcinfo" />
+    <None Include="Service References\wsRecepcaoEvento100\RecepcaoEvento.disco" />
+    <Resource Include="Library\Sapiens.Library.xml" />
+    <Content Include="Sapiens.Library.dll" />
+    <Resource Include="Sapiens.Library.xml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\NfeDistribuicaoServ\" />
+    <WCFMetadataStorage Include="Service References\RecepcaoEventoServ\" />
+    <WCFMetadataStorage Include="Service References\wsRecepcaoEvento100\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

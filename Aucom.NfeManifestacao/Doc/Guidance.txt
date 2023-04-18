@@ -1,0 +1,20 @@
+--------------- Criação da classe do XSD no CMD---------------
+
+Modo simples:
+xsd arquivo.xsd /Classes /n:namespace
+
+
+
+Caso dê errado, pode funcionar caso tenha o arquivo xmldsig-core...:
+xsd arquivo.xsd arquivo_xmldsig_core.xsd /c /l:cs /:n:namespace
+
+
+
+Caso haja um erro de caractere inválido: 
+Abra o xsd em algum editor de texto e edite os caracteres especiais, como acentuação
+
+
+
+Para evitar erro de ter duas definições em várias classes, gere uma classe mais mais de uma definição:
+xsd arquivo1.xsd arquivo2.xsd /Classes /n:namespace
+xsd arquivo1.xsd arquivo2.xsd arquivo_xmldsig_core.xsd /c /l:cs /:n:namespace
